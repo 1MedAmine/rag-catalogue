@@ -29,7 +29,12 @@ from rag_catalogue.retrieval_clients import (
 from rag_catalogue.pipeline import index_catalogue, inspect_catalogue, retrieve_catalogue_chunks, run_search
 
 
-DEFAULT_MODEL = "nvidia/llama-3.3-nemotron-super-49b-v1.5"
+# llama-3.3-nemotron-super reached end of life on 2026-08-26, so it was primary
+# in name only: every call failed and fell through. Promoting the model that
+# actually served the requests also turns reasoning on, which the client only
+# offers to the nemotron-3 family. The fallback stays on it as a second attempt
+# when a first response comes back malformed.
+DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b"
 DEFAULT_FALLBACK_MODEL = "nvidia/nemotron-3-super-120b-a12b"
 
 

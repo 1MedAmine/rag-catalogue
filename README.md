@@ -247,8 +247,13 @@ L’OCR nécessite Tesseract et les langues demandées. Sans Tesseract, le mode 
 ```text
 rapide      : thinking désactivé
 normal      : thinking actif, budget 2048, défaut
-approfondi  : thinking actif, budget 4096
+approfondi  : thinking actif, budget 8192
 ```
+
+Le budget s'**ajoute** à `max_tokens` au lieu d'être prélevé dessus : l'augmenter
+ne raccourcit pas la réponse. Le thinking n'est proposé que par la famille
+`nemotron-3` ; avec un autre modèle, le profil retombe silencieusement sur
+`rapide` — le bloc `reasoning` du résultat indique ce qui a réellement été appliqué.
 
 ```powershell
 --raisonnement rapide
@@ -276,6 +281,42 @@ Résultat attendu : la référence **`OP-2470F28G`** (24-70 mm f/2.8 G) comme
 meilleure correspondance, et une navigation vers la section
 « Standard zoom lenses » via le sommaire du catalogue. Voir
 [`examples/README.md`](examples/README.md) pour le détail.
+
+## Essai sur un grand catalogue réel (Socomec, 906 pages)
+
+Essai mené sur le catalogue général Socomec (906 pages, 189 signets) avec un
+cahier demandant un interrupteur-sectionneur 4 pôles, 250 A, 400 V AC, commande
+frontale directe, montage en armoire.
+
+**L'outil a trouvé la bonne référence.** Il retourne `3032 4025` et `3116 4025`
+— la gamme **SIRCO** sous coffret, page 821 en tôle peinte et page 820 en
+polyester, en 4 pôles / 250 A / commande frontale directe, soit exactement ce que
+demandait le cahier. Les deux références sortent en tête du classement, chacune
+appuyée sur les preuves extraites de sa page, et la validation passe sans erreur.
+
+Trois défauts ont été corrigés à cette occasion :
+
+- **Encodage de police.** 11 % du texte (190 pages) s'extrayait en charabia :
+  des sous-ensembles de police sans table ToUnicode exploitable décalent chaque
+  code de caractère d'une constante. Réparé par [`encoding_repair.py`](rag_catalogue/encoding_repair.py),
+  qui apprend les décalages du document et ne réécrit un fragment que s'il
+  devient nettement plus français. Mesure : 100 pages améliorées sur 130
+  échantillonnées, aucune régression.
+- **Couverture locale diluée.** Les requêtes reformulent un même besoin, parfois
+  dans une autre langue ; leurs jetons étaient mis en commun, si bien qu'une
+  variante traduite faisait chuter la couverture sous le seuil de repli. La
+  branche est désormais jugée sur la formulation qui lui correspond le mieux.
+- **Routage dominé par les jetons génériques.** `exact_score` est un simple
+  recouvrement d'ensembles, sans pondération : « 250 » ou « 400 » y pesaient
+  autant que « interrupteur-sectionneur », ce qui donnait la route à la section
+  la plus fournie en tableaux. Le routage n'utilise plus que les signaux
+  pondérés par la rareté.
+
+**Encore perfectible.** Sur ce catalogue, la bonne référence est le plus souvent
+atteinte par la recherche globale : la navigation hiérarchique bascule encore en
+repli (`multiple_competing_sections`) au lieu de descendre jusqu'à la section
+SIRCO, et le rang des candidats bouge d'un run à l'autre. Le comportement visé
+est décrit dans [`examples/RESULTAT_ATTENDU_socomec.md`](examples/RESULTAT_ATTENDU_socomec.md).
 
 ## Fournir son catalogue et son cahier
 

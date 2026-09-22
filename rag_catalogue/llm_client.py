@@ -29,7 +29,10 @@ REASONING_PROFILES: dict[str, dict[str, Any]] = {
     "approfondi": {
         "enable_thinking": True,
         "low_effort": False,
-        "reasoning_budget": 4096,
+        # Added to max_tokens rather than taken from it, so a larger budget
+        # buys deliberation on catalogues with competing product families
+        # without shortening the answer.
+        "reasoning_budget": 8192,
     },
 }
 

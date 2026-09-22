@@ -884,9 +884,9 @@ def test_nemotron_deep_reasoning_profile_uses_larger_budget() -> None:
             "enable_thinking": True,
             "low_effort": False,
         },
-        "reasoning_budget": 4096,
+        "reasoning_budget": 8192,
     }
-    assert call["max_tokens"] == 5896
+    assert call["max_tokens"] == 9992
 
 
 def test_select_reference_accepts_single_page_label_and_extracts_all_page_numbers() -> None:
