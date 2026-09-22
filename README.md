@@ -342,6 +342,23 @@ Pour exécuter le RAG, fournissez vos propres fichiers :
 Aucun de ces fichiers ne doit être versionné : le `.gitignore` exclut déjà
 `*.pdf`, `cahier_*.txt`, `provenance_*.json`, `.rag_cache/` et `resultats/`.
 
+## Évaluation (recall@k / MRR)
+
+Le dossier [`eval/`](eval/) fournit une évaluation quantitative et reproductible
+de la qualité de la **récupération** (avant l'étape LLM) : pour chaque requête
+annotée avec ses pages pertinentes, on mesure le **recall@k** et le **MRR**.
+
+```powershell
+python eval\evaluate_retrieval.py `
+  --catalogue ".\examples\optora_lens_catalogue.pdf" `
+  --requetes ".\eval\requetes.example.json" `
+  --ks 1,3,5,8
+```
+
+Sans clé API, ajouter `--sans-embedding` (voies lexicale + exacte seulement).
+Voir [`eval/README.md`](eval/README.md) pour le format des requêtes et
+l'interprétation des scores.
+
 ## Tests
 
 ```powershell
