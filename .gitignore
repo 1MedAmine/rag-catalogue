@@ -43,6 +43,8 @@ Thumbs.db
 !examples/optora_lens_catalogue.pdf
 !examples/cahier_objectif.txt
 !examples/README.md
+# et le cahier de l'essai Socomec, sans lequel l'essai n'est pas reproductible
+!examples/cahier_interrupteur.txt
 # mais toujours ignorer les sorties de l'exemple
 examples/resultat_*.json
 examples/.rag_cache/

@@ -284,9 +284,19 @@ meilleure correspondance, et une navigation vers la section
 
 ## Essai sur un grand catalogue réel (Socomec, 906 pages)
 
-Essai mené sur le catalogue général Socomec (906 pages, 189 signets) avec un
-cahier demandant un interrupteur-sectionneur 4 pôles, 250 A, 400 V AC, commande
-frontale directe, montage en armoire.
+Essai mené sur un vrai catalogue de constructeur, pour sortir du jeu d'exemple
+fictif : le **Catalogue Général Socomec**, 906 pages et 189 signets PDF
+hiérarchisés, dans lequel les interrupteurs-sectionneurs (gammes SIRCO, SIRCO M,
+SIDER) voisinent avec une grosse section « Protection fusible » qui décrit des
+interrupteurs-sectionneurs **-fusibles** — des produits proches en mots mais
+différents en fonction. C'est ce voisinage qui rend le cas instructif.
+
+Ce PDF appartient à Socomec et n'est pas redistribué ici ; il se télécharge
+librement depuis le site du constructeur. Le cahier de besoin, lui, est fourni :
+[`examples/cahier_interrupteur.txt`](examples/cahier_interrupteur.txt) demande un
+interrupteur-sectionneur 4 pôles, 250 A, 400 V AC, commande frontale directe,
+montage en armoire. Pour rejouer l'essai, placez le PDF dans `examples/` et
+lancez la commande de la section « Grand catalogue » avec ce cahier.
 
 **L'outil a trouvé la bonne référence.** Il retourne `3032 4025` et `3116 4025`
 — la gamme **SIRCO** sous coffret, page 821 en tôle peinte et page 820 en
@@ -316,7 +326,9 @@ Trois défauts ont été corrigés à cette occasion :
 atteinte par la recherche globale : la navigation hiérarchique bascule encore en
 repli (`multiple_competing_sections`) au lieu de descendre jusqu'à la section
 SIRCO, et le rang des candidats bouge d'un run à l'autre. Le comportement visé
-est décrit dans [`examples/RESULTAT_ATTENDU_socomec.md`](examples/RESULTAT_ATTENDU_socomec.md).
+serait `navigation_strategy = "hierarchical"` avec
+`catalogue_route = ["Interrupteurs-sectionneurs", "SIRCO"]` et aucun repli
+global — lancez avec `--diagnostic` pour voir lequel des deux chemins a servi.
 
 ## Fournir son catalogue et son cahier
 

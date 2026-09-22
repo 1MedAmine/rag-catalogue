@@ -1,0 +1,22 @@
+# Cahier des charges — interrupteur-sectionneur
+
+## Demande
+Je cherche un interrupteur-sectionneur pour la distribution d'energie basse
+tension dans une armoire industrielle. Coupure et sectionnement de securite
+en charge, manoeuvre manuelle.
+
+## Contraintes obligatoires
+- Fonction : interrupteur-sectionneur (coupure + sectionnement en charge)
+- Nombre de poles : 4 poles
+- Calibre : environ 250 A
+- Tension d'emploi : distribution basse tension (400 V AC)
+- Commande : frontale directe
+- Montage : en armoire (fond d'armoire)
+
+## Criteres de classement (souhaits)
+- Encombrement le plus compact possible a calibre egal
+- Possibilite d'ajouter un contact auxiliaire
+- Accessoires de raccordement disponibles (plages, cache-bornes)
+
+## Options
+- Version sous coffret appreciee mais non bloquante
