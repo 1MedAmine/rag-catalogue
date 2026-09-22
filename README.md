@@ -361,7 +361,7 @@ l'interprétation des scores.
 
 ### Résultats sur le catalogue d'exemple Optora
 
-Évaluation exécutée le **23 septembre 2026** sur les **4 requêtes** de
+Évaluation exécutée sur les **4 requêtes** de
 [`eval/requetes.example.json`](eval/requetes.example.json), avec la commande
 ci-dessus et le catalogue fictif `optora_lens_catalogue.pdf`.
 
