@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Secrets / configuration locale
+.env
+credentials.json
+token.json
+*.key
+
+# Cache RAG et sorties
+.rag_cache/
+resultats/
+output/
+*.log
+
+# Données lourdes / catalogues (ne pas versionner)
+*.pdf
+data/
+catalogues/
+
+# Fichiers de test locaux (cahiers / provenance)
+cahier_*.txt
+provenance_*.json
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Exceptions : garder le jeu d'exemple fictif
+!examples/optora_lens_catalogue.pdf
+!examples/cahier_objectif.txt
+!examples/README.md
+# mais toujours ignorer les sorties de l'exemple
+examples/resultat_*.json
+examples/.rag_cache/

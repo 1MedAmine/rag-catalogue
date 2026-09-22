@@ -1,0 +1,20 @@
+# Cahier des charges — besoin objectif photo
+
+## Demande
+Je cherche un objectif zoom standard pour un boitier hybride plein format
+(monture OZ-mount). Usage principal : reportage et mariage, en basse lumiere.
+
+## Contraintes obligatoires
+- Type : zoom standard
+- Plage focale : environ 24-70 mm
+- Ouverture maximale : f/2.8 constante sur toute la plage
+- Compatibilite : monture OZ-mount (plein format)
+- Stabilisation optique : requise
+
+## Criteres de classement (souhaits)
+- Poids le plus faible possible a performance egale
+- Distance minimale de mise au point courte
+- Diametre de filtre standard
+
+## Options
+- Tropicalisation appreciee mais non bloquante
