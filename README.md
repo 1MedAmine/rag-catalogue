@@ -359,6 +359,40 @@ Sans clé API, ajouter `--sans-embedding` (voies lexicale + exacte seulement).
 Voir [`eval/README.md`](eval/README.md) pour le format des requêtes et
 l'interprétation des scores.
 
+### Résultats sur le catalogue d'exemple Optora
+
+Évaluation exécutée le **23 septembre 2026** sur les **4 requêtes** de
+[`eval/requetes.example.json`](eval/requetes.example.json), avec la commande
+ci-dessus et le catalogue fictif `optora_lens_catalogue.pdf`.
+
+| Mesure | Résultat |
+| --- | ---: |
+| Recall@1 | 3/4 — **75 %** |
+| Recall@3 | 4/4 — **100 %** |
+| Recall@5 | 4/4 — **100 %** |
+| Recall@8 | 4/4 — **100 %** |
+| MRR | **0,875** |
+
+La première page pertinente apparaît au rang 1 pour les requêtes zoom standard
+24–70 mm, grand-angle 14 mm et macro 90 mm ; au rang 2 pour le téléobjectif
+70–200 mm.
+
+**Lecture des résultats.** Sur ce jeu d'exemple, la récupération est efficace :
+une page pertinente arrive en première position pour trois requêtes sur quatre,
+et en deuxième position pour la dernière. Le MRR de 0,875 confirme que les
+pages utiles remontent très tôt dans le classement. Le Recall@3 à 100 % montre
+que, pour ces quatre besoins, les trois premiers résultats suffisent à inclure
+une page pertinente dans le contexte destiné au LLM. C'est un premier signal
+positif, à confirmer sur davantage de requêtes et de vrais catalogues.
+
+Le script appelle « recall@k » la proportion de requêtes ayant **au moins une
+page pertinente parmi les k premiers résultats** (taux de succès par requête).
+Ces résultats sont encourageants, mais portent sur un petit jeu fictif : ils
+ne mesurent ni la qualité des réponses finales du LLM ni la performance sur
+un catalogue industriel réel. Dans la version exécutée, la commande
+`retrouver` n'active ni les embeddings ni le reranking ; cette mesure ne valide
+donc pas toute la chaîne hybride.
+
 ## Tests
 
 ```powershell
