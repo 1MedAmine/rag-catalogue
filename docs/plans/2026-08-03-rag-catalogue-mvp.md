@@ -1,7 +1,5 @@
 # RAG Catalogue MVP Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
-
 **Goal:** Build a standalone Python CLI that reads a product technical PDF, retrieves relevant passages from a catalogue PDF, and returns one exact catalogue reference through a configurable NVIDIA-hosted LLM.
 
 **Architecture:** PyMuPDF extracts page text. A local hybrid TF-IDF retriever combines word and character similarity while retaining catalogue page provenance. An OpenAI-compatible client performs two bounded LLM calls: product-need extraction and final reference selection.

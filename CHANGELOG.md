@@ -1,6 +1,13 @@
 # Changelog
 
-## V14.0.2
+## Depuis V14.0.2
+
+- Aligne la configuration d'exemple et la documentation sur le modèle de génération 120B déjà utilisé par défaut dans le CLI.
+- Précise le périmètre du dépôt et les limites de l'évaluation Recall@k.
+- Corrige les données incohérentes du test de référence construite, sans modifier le validateur.
+- Actualise le bilan des tests et classe les documents techniques dans `docs/plans` et `docs/specs`.
+
+## V14.0.2 — livraison initiale
 
 - Supprime la promotion automatique du candidat de rang 1 vers `closest`.
 - Ajoute `equivalence_status` : `equivalent_direct`, `alternative_conditionnelle`, `non_equivalent`, `non_verifiable` ou `proximite_documentee`.

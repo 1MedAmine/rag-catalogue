@@ -1,7 +1,5 @@
 # V12 Cahier complet avec provenance Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Construire V12 pour lire le cahier complet et un JSON de provenance complémentaire, enrichir le besoin RAG sans perdre les caractéristiques du produit source, et sécuriser par défaut la construction de référence.
 
 **Architecture:** Un nouveau chargeur assemble la fiche intégrale et la provenance structurée. Le schéma de besoin conserve `role` et `provenance`; la recherche utilise les critères discriminants tandis que la sélection finale reçoit tous les attributs et ambiguïtés. La CLI active par défaut la validation structurelle de preuve.

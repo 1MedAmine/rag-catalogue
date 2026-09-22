@@ -1,7 +1,5 @@
 # V13 Hierarchical Industrial Catalogue RAG Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Build V13, a scalable hierarchical RAG for large industrial catalogues with section routing, chunk-count adaptive depth, diversified multi-track retrieval, near-duplicate suppression, optional OCR fallback, and full diagnostics while preserving V12.3.5 behavior.
 
 **Architecture:** Extract every PDF page with layout-aware heading and quality metadata, group contiguous pages into generic catalogue sections, then perform a two-level retrieval: coarse section routing followed by fine hybrid chunk retrieval. Run technical, exact-code, selection-table, and ordering-code tracks, fuse and deduplicate them, rerank a diversified shortlist, and send only the best evidence to the generation LLM. OCR remains an optional page-level fallback and never runs on text-rich pages.

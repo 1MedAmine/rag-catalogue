@@ -1,7 +1,5 @@
 # V12.1 Ranked Candidates and Optional Diagnostic Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Return and validate a ranked list of relevant catalogue references while preserving the compact default output and opt-in diagnostic file.
 
 **Architecture:** Extend the LLM response contract to a bounded candidate collection, validate each candidate independently, expose the best candidate through the legacy `reference` field, and keep diagnostics in a separate file controlled by CLI flags.

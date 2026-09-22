@@ -4,8 +4,9 @@ Ce script mesure la qualite du RETRIEVAL (pas de la generation LLM) : pour
 chaque requete annotee, il verifie si au moins une page pertinente apparait
 dans le top-k renvoye par la commande `retrouver`.
 
-Il n'exige PAS de cle API si l'index dense est deja en cache, ou si l'on
-passe --sans-embedding (recuperation lexicale + exacte uniquement).
+La commande retrouver utilise actuellement la recuperation locale, sans
+embeddings ni reranking distant. Aucune cle API ni index dense n'est requis ;
+--sans-embedding est accepte mais ne change pas ce comportement.
 
 Usage :
     python eval/evaluate_retrieval.py \

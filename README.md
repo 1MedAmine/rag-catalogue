@@ -1,4 +1,4 @@
-# RAG catalogue industriel NVIDIA — V14.0.2 + Cahier V4.1 MAX
+# RAG catalogue industriel NVIDIA — V14.0.2
 
 V14 reçoit un **cahier technique complet** en PDF, TXT, Markdown ou JSON, puis recherche et classe jusqu’à cinq références pertinentes dans un catalogue PDF cible.
 
@@ -20,9 +20,13 @@ Lorsque le catalogue n’a pas de structure fiable, V14 bascule automatiquement 
 ```text
 Embedding  : nvidia/nemotron-3-embed-1b
 Reranking  : nvidia/llama-nemotron-rerank-1b-v2
-Génération principale : nvidia/llama-3.3-nemotron-super-49b-v1.5
+Génération principale : nvidia/nemotron-3-super-120b-a12b
 Repli génération      : nvidia/nemotron-3-super-120b-a12b
 ```
+
+Le repli utilise par défaut le même modèle : il permet une seconde tentative
+en cas de sortie structurée invalide ou inexploitable. Un autre modèle peut
+être configuré avec `--modele-secours`.
 
 ## Ce que V14 ajoute
 
@@ -39,11 +43,17 @@ Repli génération      : nvidia/nemotron-3-super-120b-a12b
 - conservation de tous les correctifs V13.1.1 : alternatives proches, multi-candidats, OCR, réparation JSON, raisonnement et provenance.
 
 
-## Cahier V4.1 MAX
+## Cahier technique et provenance V4.1
 
-Pour une demande limitée à une référence, le générateur ne considère plus la demande comme techniquement vide. Il distingue les contraintes explicites, les contraintes dérivées obligatoires, les critères de classement, les options et les informations à confirmer.
+Le moteur reçoit un cahier technique déjà rédigé. Un fichier de provenance
+JSON facultatif lui permet de distinguer les contraintes client, les
+contraintes dérivées prouvées, les caractéristiques du produit source, les
+options et les informations à confirmer. Le générateur de cahier utilisé
+en amont n'est pas inclus dans ce dépôt.
 
-Une contrainte dérivée est conservée seulement si la référence, la valeur et leur relation structurelle sont prouvées. Un audit vérifie qu'une référence exacte possède au moins une fonction et une autre dimension structurante avant publication. Le modèle 49B est utilisé en premier ; le 120B est appelé une seule fois si cet audit échoue.
+Les contraintes dérivées ne sont conservées que si les preuves relient la
+référence à la valeur demandée, directement ou par une relation structurelle
+documentée dans un tableau, un bloc produit ou une codification.
 
 Le RAG s'utilise toujours avec un seul fichier principal :
 
@@ -88,10 +98,8 @@ NVIDIA_API_KEY=nvapi-TA_CLE
 NVIDIA_REASONING_MODE=normal
 NVIDIA_EMBED_MODEL=nvidia/nemotron-3-embed-1b
 NVIDIA_RERANK_MODEL=nvidia/llama-nemotron-rerank-1b-v2
-NVIDIA_MODEL=nvidia/llama-3.3-nemotron-super-49b-v1.5
+NVIDIA_MODEL=nvidia/nemotron-3-super-120b-a12b
 NVIDIA_FALLBACK_MODEL=nvidia/nemotron-3-super-120b-a12b
-NVIDIA_CAHIER_MODEL_PRIMARY=nvidia/llama-3.3-nemotron-super-49b-v1.5
-NVIDIA_CAHIER_MODEL_FALLBACK=nvidia/nemotron-3-super-120b-a12b
 RAG_CATALOGUE_PROFILE=auto
 RAG_OCR_MODE=auto
 ```
@@ -332,7 +340,8 @@ global — lancez avec `--diagnostic` pour voir lequel des deux chemins a servi.
 
 ## Fournir son catalogue et son cahier
 
-Ce dépôt ne contient volontairement aucun catalogue PDF ni donnée client.
+Le dépôt fournit le catalogue fictif Optora et les cahiers d'exemple décrits
+ci-dessus. Aucun catalogue de constructeur ni donnée client n'est versionné.
 Pour exécuter le RAG, fournissez vos propres fichiers :
 
 - un **catalogue** au format PDF (`--catalogue ".\\mon_catalogue.pdf"`) ;
@@ -355,7 +364,8 @@ python eval\evaluate_retrieval.py `
   --ks 1,3,5,8
 ```
 
-Sans clé API, ajouter `--sans-embedding` (voies lexicale + exacte seulement).
+Cette évaluation fonctionne sans clé API : la commande `retrouver` utilise
+la récupération locale, sans embeddings ni reranking distant.
 Voir [`eval/README.md`](eval/README.md) pour le format des requêtes et
 l'interprétation des scores.
 
@@ -399,3 +409,8 @@ donc pas toute la chaîne hybride.
 $env:PYTHONPATH="."
 python -m pytest -q
 ```
+
+Le détail des vérifications et de leurs limites se trouve dans
+[`VERIFICATION.md`](VERIFICATION.md). L'[architecture](ARCHITECTURE.md) décrit
+le fonctionnement actuel ; les [plans](docs/plans/) et
+[spécifications](docs/specs/) conservent les choix des versions précédentes.

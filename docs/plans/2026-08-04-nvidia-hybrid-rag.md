@@ -1,7 +1,5 @@
 # NVIDIA Hybrid RAG Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Upgrade the catalogue tool from lexical retrieval to a hybrid NVIDIA RAG using `nvidia/nemotron-3-embed-1b`, `nvidia/llama-nemotron-rerank-1b-v2`, and `nvidia/nemotron-3-super-120b-a12b`.
 
 **Architecture:** Keep the existing PDF/table extraction and lexical retrieval. Add dense catalogue embeddings with a local cache, fuse dense and lexical candidates, rerank the fused pool with NVIDIA Ranking NIM, and send the best passages to the generation LLM. Keep the system domain-neutral and expose each model independently in the CLI.

@@ -1,7 +1,5 @@
 # V13 Large Catalogue RAG Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Build a domain-neutral V13 RAG pipeline that stays accurate on large, heterogeneous industrial catalogues through hierarchy-aware retrieval, chunk-count adaptive depth, structural lanes, near-duplicate suppression, optional OCR fallback, and richer diagnostics.
 
 **Architecture:** Preserve V12.3.5’s lexical+dense+rerank+generation pipeline, then add a catalogue map that assigns chunks to sections and kinds. Retrieval runs global, section-focused, and structural lanes, fuses them, removes near duplicates, diversifies final context, and only then reranks. PDF inspection detects low-text image pages; OCR remains optional and bounded.

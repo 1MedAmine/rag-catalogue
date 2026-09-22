@@ -28,23 +28,25 @@ fichier de requetes au meme format :
 ]
 ```
 
-## Sans cle API
+## Perimetre de la mesure
 
-L'evaluation appelle la commande `retrouver`. Si aucun index dense n'est en
-cache, ajoute `--sans-embedding` pour n'utiliser que les voies lexicale et
-exacte (aucun appel reseau) :
+L'evaluation appelle la commande `retrouver`, qui utilise actuellement la
+recuperation locale avec navigation hierarchique. Elle ne branche ni client
+d'embeddings ni reranker distant : aucune cle API et aucun cache dense ne
+sont necessaires. L'option `--sans-embedding` est acceptee par le script mais
+ne change pas ce comportement.
 
-```powershell
-python eval\evaluate_retrieval.py `
-  --catalogue ".\examples\optora_lens_catalogue.pdf" `
-  --requetes ".\eval\requetes.example.json" `
-  --sans-embedding
-```
+Le resultat porte sur le classement des passages avant generation. Il ne
+mesure pas la qualite des reponses finales ni toute la chaine hybride de la
+commande `chercher`.
 
 ## Interpretation
 
 - Un **recall@5 eleve** montre que les bonnes pages remontent presque toujours
-  dans les 5 premiers resultats : le LLM recevra le bon contexte.
+  dans les 5 premiers resultats ; cela ne garantit pas que toutes les
+  informations necessaires a la reponse sont presentes.
 - Un **MRR proche de 1** signifie que la page pertinente est souvent en tete.
-- Comparer avec et sans `--sans-hierarchie` (via un fichier de requetes dedie)
-  permet de mesurer l'apport de la navigation hierarchique.
+- Le script ne transmet pas d'option `--sans-hierarchie`. Pour comparer la
+  navigation hierarchique a la recherche globale, lancer directement
+  `rag_catalogue_cli.py retrouver` avec et sans cette option, sur les memes
+  requetes et les memes pages annotees.

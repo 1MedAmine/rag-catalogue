@@ -462,7 +462,7 @@ def test_validation_accepts_constructed_reference_only_when_ordered_parts_are_pr
     chunks = [_ranked_chunk(42, ordering_text)]
     parts = ["HGD", "63", "P", "2P", "MC", "S", "00", "00", "C", "00006"]
     raw = {
-        "reference": "REF-DEMO-032PMCS0000C00006",
+        "reference": "HGD63P2PMCS0000C00006",
         "reference_mode": "constructed",
         "reference_parts": [
             {"position": index, "code": code, "page": 42}
@@ -475,7 +475,7 @@ def test_validation_accepts_constructed_reference_only_when_ordered_parts_are_pr
 
     result = validate_catalogue_result(raw, {"source_reference": "A9F77206"}, chunks)
 
-    assert result["reference"] == "REF-DEMO-032PMCS0000C00006"
+    assert result["reference"] == "HGD63P2PMCS0000C00006"
     assert result["validation_errors"] == []
 
 

@@ -1,7 +1,5 @@
 # V12.3 Reasoning Modes Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
-
 **Goal:** Add configurable Nemotron reasoning modes while preserving structured JSON reliability and handling transient NVIDIA saturation.
 
 **Architecture:** The CLI selects a named reasoning profile and passes it to `NvidiaChatClient`. The client translates that profile into NVIDIA `chat_template_kwargs`, `reasoning_budget`, and an adjusted token ceiling. Response normalization remains deterministic in Python, including tolerant catalogue page parsing.

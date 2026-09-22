@@ -1,20 +1,24 @@
 # Architecture V14.0.2 — RAG à navigation humaine avec repli global
 
 
-## 0. Entrée V4.1 et routage des modèles
+## 0. Cahier technique, provenance et génération
 
-Une demande par référence exacte passe par un audit de provenance avant le RAG :
+Le moteur lit un cahier technique fourni en entrée et, s'il existe, son
+fichier de provenance V4.1. Le générateur de ce cahier est un composant amont
+qui n'est pas inclus dans ce dépôt.
 
-```text
-référence exacte
-→ identification documentée
-→ contraintes dérivées avec preuve directe ou relation structurelle
-→ audit fonction + dimension structurante
-→ 49B accepté si complet
-→ sinon repli unique 120B
-```
+La provenance distingue les contraintes client, les contraintes dérivées
+prouvées, les caractéristiques du produit source, les options et les éléments
+à confirmer. Le moteur conserve une contrainte dérivée lorsque les preuves
+relient la référence et la valeur, directement ou par une relation
+structurelle attestée.
 
-Le classement final sépare désormais le rang commercial de la qualification technique. Le rang 1 ne peut plus modifier à lui seul `equivalence_status`.
+La génération utilise `nvidia/nemotron-3-super-120b-a12b` par défaut. Le client
+de repli est configurable ; il utilise le même modèle par défaut pour une
+seconde tentative en cas de sortie structurée invalide ou inexploitable.
+
+Le classement final sépare le rang commercial de la qualification technique.
+Le rang 1 ne peut pas modifier à lui seul `equivalence_status`.
 
 ## Flux principal
 
